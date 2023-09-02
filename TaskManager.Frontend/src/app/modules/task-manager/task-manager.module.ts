@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { TaskManagerRoutingModule } from './task-manager-routing.module';
 import { TaskManagerComponent } from './task-manager.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskItemComponent } from './components/task-item/task-item.component';
 
 
 @NgModule({
   declarations: [
-    TaskManagerComponent
+    TaskManagerComponent,
+    TaskListComponent,
+    TaskItemComponent
   ],
   imports: [
     CommonModule,

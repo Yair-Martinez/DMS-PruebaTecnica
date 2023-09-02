@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TaskManager.Backend.Configurations;
 using TaskManager.Backend.Data;
 using TaskManager.Backend.Repositories.TareaRepository;
 
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
+
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 

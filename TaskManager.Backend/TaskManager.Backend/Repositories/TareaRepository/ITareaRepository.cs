@@ -6,6 +6,6 @@ namespace TaskManager.Backend.Repositories.TareaRepository
 	{
 		Task<IEnumerable<Tarea>> GetAllTareasAsync();
 		Task<Tarea> GetTareaAsync(Guid id);
-		Task<Tarea> CreateTareaAsync(Tarea tarea);
+		Task CreateTareaAsync(Tarea tarea);
 	}
 }

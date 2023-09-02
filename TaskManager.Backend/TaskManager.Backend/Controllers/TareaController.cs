@@ -23,7 +23,6 @@ namespace TaskManager.Backend.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			var tareas = await _repository.GetAllTareasAsync();
-			if (tareas == null) return NotFound();
 
 			var tareasReadOnlyDto = _mapper.Map<IEnumerable<TareaReadOnlyDto>>(tareas);
 			return Ok(tareasReadOnlyDto);
@@ -33,7 +32,6 @@ namespace TaskManager.Backend.Controllers
 		public async Task<IActionResult> Get(Guid id)
 		{
 			var tarea = await _repository.GetTareaAsync(id);
-			if (tarea == null) return NotFound();
 
 			var tareaReadOnlyDto = _mapper.Map<TareaReadOnlyDto>(tarea);
 			return Ok(tareaReadOnlyDto);
@@ -43,9 +41,7 @@ namespace TaskManager.Backend.Controllers
 		public async Task<IActionResult> Post(TareaCreateDto tareaCreateDto)
 		{
 			var tarea = _mapper.Map<Tarea>(tareaCreateDto);
-
-			var response = await _repository.CreateTareaAsync(tarea);
-			if (response == null) return BadRequest();
+			await _repository.CreateTareaAsync(tarea);
 
 			return CreatedAtAction(nameof(Get), new { id = tarea.Id }, tarea);
 		}

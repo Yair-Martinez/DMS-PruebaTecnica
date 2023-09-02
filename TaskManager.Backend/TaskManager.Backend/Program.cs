@@ -18,6 +18,14 @@ builder.Services.AddDbContext<DataContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAll",
+		b => b.AllowAnyMethod()
+		.AllowAnyHeader()
+		.AllowAnyOrigin());
+});
+
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -37,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

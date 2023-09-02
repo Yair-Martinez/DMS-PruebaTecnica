@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba($color: #000000, $alpha: .2);
+
+  form {
+    width: 100%;
+
+    .form-control {
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+}

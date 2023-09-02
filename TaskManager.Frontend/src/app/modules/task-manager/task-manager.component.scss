@@ -14,9 +14,18 @@
     width: 100%;
 
     .form-control {
+      margin: 0.5rem;
 
       input {
         width: 100%;
+      }
+
+      .btn-submit {
+        display: block;
+        width: 33%;
+        margin: auto;
+        padding: 0.5rem;
+        cursor: pointer;
       }
     }
   }

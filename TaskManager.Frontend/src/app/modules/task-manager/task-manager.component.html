@@ -1,15 +1,20 @@
 <h1>Task Manager</h1>
 
-<form>
+<form [formGroup]="taskForm" (ngSubmit)="sendTask()">
   <div class="form-control">
     <label for="titulo">Título</label><br>
-    <input type="text" id="titulo" name="titulo" placeholder="Ingrese un Título...">
+    <input type="text" id="titulo" formControlName="titulo" placeholder="Ingrese un Título...">
   </div>
 
   <div class="form-control">
     <label for="titulo">Descripción</label><br>
-    <input type="text" id="descripcion" name="descripcion" placeholder="Ingrese un Descripción...">
+    <input type="text" id="descripcion" formControlName="descripcion" placeholder="Ingrese un Descripción...">
   </div>
+
+  <div class="form-control">
+    <input type="submit" class="btn-submit" value="Submit">
+  </div>
+
 </form>
 
 <div class="btn-container">

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ITareaResponse } from '../interfaces/ITareaResponse.interface';
+import { ITareaRequest } from '../interfaces/ITareaRequest.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class ApiService {
     return this.http.get<ITareaResponse>(this.apiUrl + "/Tarea/" + id);
   }
 
-  setTarea(tarea: any): Observable<ITareaResponse> {
+  setTarea(tarea: ITareaRequest): Observable<ITareaResponse> {
     return this.http.post<ITareaResponse>(this.apiUrl + "/Tarea", tarea);
   }
 

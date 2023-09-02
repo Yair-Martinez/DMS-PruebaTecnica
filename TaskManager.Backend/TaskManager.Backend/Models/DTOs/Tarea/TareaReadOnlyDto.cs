@@ -4,8 +4,8 @@ namespace TaskManager.Backend.Models.DTOs.Tarea
 {
 	public class TareaReadOnlyDto
 	{
-		string Titulo { get; set; } = string.Empty;
-		string Descripcion { get; set; } = string.Empty;
-		Estados Estado { get; set; }
+		public string Titulo { get; set; } = string.Empty;
+		public string Descripcion { get; set; } = string.Empty;
+		public Estados Estado { get; set; }
 	}
 }

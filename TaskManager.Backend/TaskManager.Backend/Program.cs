@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using TaskManager.Backend.Configurations;
 using TaskManager.Backend.Data;
 using TaskManager.Backend.Repositories.TareaRepository;
@@ -18,6 +19,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 

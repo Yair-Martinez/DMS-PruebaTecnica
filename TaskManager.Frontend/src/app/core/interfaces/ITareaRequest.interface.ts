@@ -1,4 +1,5 @@
 export interface ITareaRequest {
   titulo: string,
-  descripcion: string
+  descripcion: string,
+  usuarioId: string
 }

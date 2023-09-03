@@ -14,12 +14,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
 
-  getTareas(): Observable<Array<ITareaResponse>> {
-    return this.http.get<Array<any>>(this.apiUrl + "/Tarea");
-  }
-
-  getTarea(id: string): Observable<ITareaResponse> {
-    return this.http.get<ITareaResponse>(this.apiUrl + "/Tarea/" + id);
+  getTareas(id: string): Observable<Array<ITareaResponse>> {
+    return this.http.get<Array<ITareaResponse>>(this.apiUrl + "/Tarea/" + id);
   }
 
   setTarea(tarea: ITareaRequest): Observable<ITareaResponse> {

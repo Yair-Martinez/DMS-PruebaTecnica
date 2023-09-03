@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ITareaRequest } from 'src/app/core/interfaces/ITareaRequest.interface';
 import { ApiService } from 'src/app/core/services/api.service';
+import { AuthApiService } from 'src/app/core/services/auth-api.service';
 import { TasksDataService } from 'src/app/core/services/tasks-data.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class TaskManagerComponent implements OnInit {
   private apiService = inject(ApiService);
   private tasksDataService = inject(TasksDataService);
   private fb = inject(FormBuilder);
+  private authService = inject(AuthApiService);
 
   taskForm = this.fb.group({
     titulo: ["", [Validators.required]],
@@ -25,7 +27,7 @@ export class TaskManagerComponent implements OnInit {
   }
 
   receiveTask() {
-    this.apiService.getTareas().subscribe(res => {
+    this.apiService.getTareas(this.authService.getUserId()!).subscribe(res => {
       console.log(res);
       this.tasksDataService.setTasks(res);
     });
@@ -36,7 +38,8 @@ export class TaskManagerComponent implements OnInit {
 
       const tarea: ITareaRequest = {
         titulo: this.taskForm.value.titulo!,
-        descripcion: this.taskForm.value.descripcion!
+        descripcion: this.taskForm.value.descripcion!,
+        usuarioId: this.authService.getUserId()!
       };
 
       this.apiService.setTarea(tarea).subscribe(res => {

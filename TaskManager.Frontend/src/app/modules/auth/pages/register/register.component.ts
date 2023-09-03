@@ -25,12 +25,10 @@ export class RegisterComponent {
 
   registrar() {
     const usuario = this.registerForm.value;
-    console.log("Registrar", usuario);
     this.successMessage = "";
     this.errorMessage = "";
 
     this.authService.signUp(usuario).subscribe(res => {
-      console.log("📋 ~ file: register.component.ts:28 ~ RegisterComponent ~ this.authService.signUp ~ res:", res)
       this.successMessage = "¡Usuario registrado exitosamente!";
     },
       (err) => {

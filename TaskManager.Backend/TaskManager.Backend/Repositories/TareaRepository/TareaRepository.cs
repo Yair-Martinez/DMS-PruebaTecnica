@@ -35,6 +35,9 @@ namespace TaskManager.Backend.Repositories.TareaRepository
 
 		public async Task CreateTareaAsync(Tarea tarea)
 		{
+			var usuario = await _dataContext.Usuarios.FindAsync(tarea.UsuarioId);
+			if (usuario == null) throw new NotFoundException($"Usuario con Id {tarea.UsuarioId} no se encuentra registrado.");
+
 			_dataContext.Tareas.Add(tarea);
 			await _dataContext.SaveChangesAsync();
 		}

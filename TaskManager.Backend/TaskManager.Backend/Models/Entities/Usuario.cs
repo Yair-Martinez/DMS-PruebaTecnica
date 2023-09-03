@@ -16,5 +16,6 @@ namespace TaskManager.Backend.Models.Entities
 		public string Email { get; set; } = string.Empty;
 		[Required]
 		public string Password { get; set; } = string.Empty;
+		public ICollection<Tarea> Tareas { get; set; }
 	}
 }

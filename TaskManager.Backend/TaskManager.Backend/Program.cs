@@ -9,6 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using FluentValidation;
+using TaskManager.Backend.Models.Validations.Tarea;
+using TaskManager.Backend.Models.Validations.Usuario;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,8 +61,6 @@ builder.Services.AddSwaggerGen(options =>
 	options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddAutoMapper(typeof(MapperConfig));
-
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
 	options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -67,6 +68,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+builder.Services.AddValidatorsFromAssemblyContaining<TareaCreateValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioLoginValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioRegisterValidator>();
+
 
 var app = builder.Build();
 

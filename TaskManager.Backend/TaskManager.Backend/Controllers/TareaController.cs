@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Backend.Models.DTOs.Tarea;
 using TaskManager.Backend.Models.Entities;
+using TaskManager.Backend.Models.Validations.Tarea;
 using TaskManager.Backend.Repositories.TareaRepository;
 
 namespace TaskManager.Backend.Controllers
@@ -14,11 +16,16 @@ namespace TaskManager.Backend.Controllers
 	{
 		private readonly ITareaRepository _repository;
 		private readonly IMapper _mapper;
+		private readonly TareaCreateValidator _validator;
 
-		public TareaController(ITareaRepository repository, IMapper mapper)
+		public TareaController(
+			ITareaRepository repository,
+			IMapper mapper,
+			TareaCreateValidator validator)
 		{
 			_repository = repository;
 			_mapper = mapper;
+			_validator = validator;
 		}
 
 		[HttpGet]
@@ -42,6 +49,8 @@ namespace TaskManager.Backend.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(TareaCreateDto tareaCreateDto)
 		{
+			_validator.ValidateAndThrow(tareaCreateDto);
+
 			var tarea = _mapper.Map<Tarea>(tareaCreateDto);
 			await _repository.CreateTareaAsync(tarea);
 

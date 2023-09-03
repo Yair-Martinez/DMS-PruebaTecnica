@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TaskManager.Backend.Models.Entities
 {
@@ -16,6 +17,7 @@ namespace TaskManager.Backend.Models.Entities
 		public string Email { get; set; } = string.Empty;
 		[Required]
 		public string Password { get; set; } = string.Empty;
+		[JsonIgnore]
 		public ICollection<Tarea> Tareas { get; set; }
 	}
 }

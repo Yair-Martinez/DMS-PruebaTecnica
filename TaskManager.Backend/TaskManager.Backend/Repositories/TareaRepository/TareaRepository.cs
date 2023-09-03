@@ -21,12 +21,16 @@ namespace TaskManager.Backend.Repositories.TareaRepository
 			return tareas;
 		}
 
-		public async Task<Tarea> GetTareaAsync(Guid id)
+		public async Task<IEnumerable<Tarea>> GetTareasByUserAsync(Guid userId)
 		{
-			var tarea = await _dataContext.Tareas.FindAsync(id);
-			if (tarea == null) throw new NotFoundException($"No existe tarea con Id: {id}");
+			var usuario = await _dataContext.Usuarios.FindAsync(userId);
+			if (usuario == null) throw new NotFoundException($"Usuario con Id {userId} no se encuentra registrado.");
 
-			return tarea;
+			var tareas = await (from t in _dataContext.Tareas
+													where t.UsuarioId == userId
+													select t).ToListAsync();
+
+			return tareas;
 		}
 
 		public async Task CreateTareaAsync(Tarea tarea)

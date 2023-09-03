@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using TaskManager.Backend.Configurations;
 using TaskManager.Backend.Data;
 using TaskManager.Backend.Repositories.TareaRepository;
+using TaskManager.Backend.Repositories.UsuarioRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 var app = builder.Build();
 

@@ -66,7 +66,7 @@ namespace TaskManager.Backend.Configurations
 					break;
 			}
 
-			Console.WriteLine(stackTrace);
+			Console.WriteLine("\nstackTrace: " + stackTrace);
 
 			var exceptionResponse = JsonSerializer.Serialize(new { status, error = message });
 			context.Response.ContentType = "application/json";

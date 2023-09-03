@@ -28,12 +28,12 @@ namespace TaskManager.Backend.Controllers
 			return Ok(tareasReadOnlyDto);
 		}
 
-		[HttpGet("{id}")]
-		public async Task<IActionResult> Get(Guid id)
+		[HttpGet("{userId}")]
+		public async Task<IActionResult> GetByUser(Guid userId)
 		{
-			var tarea = await _repository.GetTareaAsync(id);
+			var tareas = await _repository.GetTareasByUserAsync(userId);
 
-			var tareaReadOnlyDto = _mapper.Map<TareaReadOnlyDto>(tarea);
+			var tareaReadOnlyDto = _mapper.Map<IEnumerable<TareaReadOnlyDto>>(tareas);
 			return Ok(tareaReadOnlyDto);
 		}
 
@@ -43,7 +43,7 @@ namespace TaskManager.Backend.Controllers
 			var tarea = _mapper.Map<Tarea>(tareaCreateDto);
 			await _repository.CreateTareaAsync(tarea);
 
-			return CreatedAtAction(nameof(Get), new { id = tarea.Id }, tarea);
+			return CreatedAtAction(null, new { id = tarea.Id }, tarea);
 		}
 	}
 }

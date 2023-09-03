@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Backend.Models.DTOs.Tarea;
 using TaskManager.Backend.Models.Entities;
@@ -8,6 +9,7 @@ namespace TaskManager.Backend.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class TareaController : ControllerBase
 	{
 		private readonly ITareaRepository _repository;

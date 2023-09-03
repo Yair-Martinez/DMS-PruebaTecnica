@@ -4,6 +4,11 @@ using TaskManager.Backend.Configurations;
 using TaskManager.Backend.Data;
 using TaskManager.Backend.Repositories.TareaRepository;
 using TaskManager.Backend.Repositories.UsuarioRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +30,32 @@ builder.Services.AddCors(options =>
 		b => b.AllowAnyMethod()
 		.AllowAnyHeader()
 		.AllowAnyOrigin());
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuerSigningKey = true,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+			.GetBytes(builder.Configuration.GetSection("AppSettings:JwtSecretKey").Value!)),
+			ValidateIssuer = false,
+			ValidateAudience = false
+		};
+	});
+
+builder.Services.AddSwaggerGen(options =>
+{
+	options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+	{
+		Description = "Autorización estandar usando el esquema Bearer: ('bearer {token}')",
+		In = ParameterLocation.Header,
+		Name = "Authorization",
+		Type = SecuritySchemeType.ApiKey
+	});
+
+	options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
@@ -49,6 +80,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

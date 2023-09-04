@@ -49,4 +49,9 @@ export class TaskManagerComponent implements OnInit {
       this.taskForm.reset();
     }
   }
+
+  setFlitro(event: any) {
+    this.tasksDataService.setFiltro(event.target.value);
+  }
+
 }

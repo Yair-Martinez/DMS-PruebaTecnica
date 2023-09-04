@@ -13,5 +13,10 @@ export class TaskListComponent {
   private tasksDataService = inject(TasksDataService);
 
   tareas$: BehaviorSubject<Array<ITareaResponse>> = this.tasksDataService.getTasks();
+  filtro$: BehaviorSubject<string> = this.tasksDataService.getFiltro();
+
+  get filtro() {
+    return this.filtro$.getValue();
+  }
 
 }

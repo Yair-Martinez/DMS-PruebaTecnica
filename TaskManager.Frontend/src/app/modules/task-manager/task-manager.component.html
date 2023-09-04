@@ -18,9 +18,9 @@
 </form>
 
 <div class="btn-container">
-  <button type="button">Todas</button>
-  <button type="button">Pendientes</button>
-  <button type="button">Completadas</button>
+  <button type="button" (click)="setFlitro($event)" value="Todas">Todas</button>
+  <button type="button" (click)="setFlitro($event)" value="Pendiente">Pendiente</button>
+  <button type="button" (click)="setFlitro($event)" value="Completada">Completada</button>
 </div>
 
 <Task-List></Task-List>

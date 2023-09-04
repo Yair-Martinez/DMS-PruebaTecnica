@@ -24,7 +24,6 @@ export class TaskItemComponent {
 
     const task = Object.assign({}, this.tarea, { usuarioId: this.authService.getUserId() });
     task.estado = this.isComplete ? "Completada" : "Pendiente";
-    console.log("📋 ~ file: task-item.component.ts:26 ~ TaskItemComponent ~ checkInput ~ task:", task)
 
     this.apiService.updateTarea(task).subscribe();
   }

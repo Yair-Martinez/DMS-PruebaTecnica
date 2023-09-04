@@ -8,6 +8,7 @@ import { ITareaResponse } from '../interfaces/ITareaResponse.interface';
 export class TasksDataService {
 
   private tasks$ = new BehaviorSubject<Array<ITareaResponse>>([]);
+  private filtro$ = new BehaviorSubject<string>("");
 
   constructor() { }
 
@@ -17,5 +18,14 @@ export class TasksDataService {
 
   setTasks(tareas: ITareaResponse[]) {
     return this.tasks$.next(tareas);
+  }
+
+  //Filtro
+  getFiltro() {
+    return this.filtro$;
+  }
+
+  setFiltro(filtro: string) {
+    this.filtro$.next(filtro);
   }
 }

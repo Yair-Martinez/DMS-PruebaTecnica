@@ -22,4 +22,8 @@ export class ApiService {
     return this.http.post<ITareaResponse>(this.apiUrl + "/Tarea", tarea);
   }
 
+  updateTarea(tarea: any): Observable<any> {
+    return this.http.put<ITareaResponse>(this.apiUrl + "/Tarea", tarea);
+  }
+
 }

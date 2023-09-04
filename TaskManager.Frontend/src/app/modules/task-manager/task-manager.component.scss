@@ -18,6 +18,9 @@
 
       input {
         width: 100%;
+        padding: 0.5rem;
+        border: 1px solid lightgray;
+        border-radius: 0.3rem;
       }
 
       .btn-submit {
@@ -25,16 +28,53 @@
         width: 33%;
         margin: auto;
         padding: 0.5rem;
+        transition: all .3s ease;
+        background-color: #fff;
         cursor: pointer;
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
       }
     }
   }
 
   .btn-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     margin: 1rem 0;
-  }
 
+    button {
+      padding: 0.5rem;
+      border: 1px solid lightgray;
+      border-radius: 0.3rem;
+      background-color: transparent;
+      transition: all .3s ease;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background-color: #000000;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  :host {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :host {
+    width: 90%;
+  }
 }

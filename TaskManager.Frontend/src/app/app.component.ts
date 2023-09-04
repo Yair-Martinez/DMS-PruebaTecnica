@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthApiService } from './core/services/auth-api.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TaskManager.Frontend';
+
+  private authService = inject(AuthApiService);
+
+  get showLogout(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }

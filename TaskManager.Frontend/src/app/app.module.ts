@@ -6,13 +6,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
+import { BtnLogoutComponent } from './shared/components/btn-logout/btn-logout.component';
 
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BtnLogoutComponent
   ],
   imports: [
     BrowserModule,

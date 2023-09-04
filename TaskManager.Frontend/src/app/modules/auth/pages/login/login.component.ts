@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IUsuarioLogin } from 'src/app/core/interfaces/IUsuarioLogin.interface';
 import { AuthApiService } from 'src/app/core/services/auth-api.service';
 
 @Component({
@@ -24,15 +25,19 @@ export class LoginComponent {
 
 
   ingresar() {
-    const usuario = this.loginForm.value;
+    const usuario: IUsuarioLogin = {
+      email: this.loginForm.value.email!,
+      password: this.loginForm.value.password!,
+    };
+
     this.successMessage = "";
     this.errorMessage = "";
 
     this.authService.signIn(usuario).subscribe(res => {
       this.authService.setToken(res.token);
-      this.authService.setUserId(res.id);
+      this.authService.setUserId(res.usuarioId);
       this.successMessage = "¡Usuario inició sesión exitosamente!";
-      
+
       this.router.navigate(["/task-manager"]);
     },
       (err) => {

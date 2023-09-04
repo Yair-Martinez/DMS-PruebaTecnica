@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { IUsuarioRegister } from 'src/app/core/interfaces/IUsuarioRegister.interface';
 import { AuthApiService } from 'src/app/core/services/auth-api.service';
 
 @Component({
@@ -24,7 +25,13 @@ export class RegisterComponent {
 
 
   registrar() {
-    const usuario = this.registerForm.value;
+    const usuario: IUsuarioRegister = {
+      nombre: this.registerForm.value.nombre!,
+      apellido: this.registerForm.value.apellido!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+    };
+
     this.successMessage = "";
     this.errorMessage = "";
 

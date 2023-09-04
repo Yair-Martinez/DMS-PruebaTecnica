@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,10 +14,19 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: "not-found",
+    component: NotFoundComponent
+  },
+  {
     path: "",
     redirectTo: "auth",
     pathMatch: "full"
-  }
+  },
+  {
+    path: "**",
+    redirectTo: "not-found",
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { IUsuarioRegister } from '../interfaces/IUsuarioRegister.interface';
+import { IUsuarioLogin } from '../interfaces/IUsuarioLogin.interface';
+import { IUsuarioResponse } from '../interfaces/IUsuarioResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +16,12 @@ export class AuthApiService {
   constructor(private http: HttpClient, private router: Router) { }
 
   //API-AUTH
-  signUp(usuario: any): Observable<any> {
+  signUp(usuario: IUsuarioRegister): Observable<any> {
     return this.http.post(this.apiUrl + "/Usuario/register", usuario);
   }
 
-  signIn(usuario: any): Observable<any> {
-    return this.http.post(this.apiUrl + "/Usuario/login", usuario);
+  signIn(usuario: IUsuarioLogin): Observable<IUsuarioResponse> {
+    return this.http.post<IUsuarioResponse>(this.apiUrl + "/Usuario/login", usuario);
   }
 
 

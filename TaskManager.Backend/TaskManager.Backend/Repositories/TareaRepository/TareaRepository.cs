@@ -41,5 +41,14 @@ namespace TaskManager.Backend.Repositories.TareaRepository
 			_dataContext.Tareas.Add(tarea);
 			await _dataContext.SaveChangesAsync();
 		}
+
+		public async Task EditTareaAsync(Tarea tarea)
+		{
+			var usuario = await _dataContext.Usuarios.FindAsync(tarea.UsuarioId);
+			if (usuario == null) throw new NotFoundException($"Usuario con Id {tarea.UsuarioId} no se encuentra registrado.");
+
+			_dataContext.Entry(tarea).State = EntityState.Modified;
+			await _dataContext.SaveChangesAsync();
+		}
 	}
 }

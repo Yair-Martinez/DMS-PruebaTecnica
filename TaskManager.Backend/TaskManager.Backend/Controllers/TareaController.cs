@@ -16,16 +16,19 @@ namespace TaskManager.Backend.Controllers
 	{
 		private readonly ITareaRepository _repository;
 		private readonly IMapper _mapper;
-		private readonly TareaCreateValidator _validator;
+		private readonly TareaCreateValidator _validatorCreate;
+		private readonly TareaUpdateValidator _validatorUpdate;
 
 		public TareaController(
 			ITareaRepository repository,
 			IMapper mapper,
-			TareaCreateValidator validator)
+			TareaCreateValidator validatorCreate,
+			TareaUpdateValidator validatorUpdate)
 		{
 			_repository = repository;
 			_mapper = mapper;
-			_validator = validator;
+			_validatorCreate = validatorCreate;
+			_validatorUpdate = validatorUpdate;
 		}
 
 		[HttpGet]
@@ -49,12 +52,23 @@ namespace TaskManager.Backend.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(TareaCreateDto tareaCreateDto)
 		{
-			_validator.ValidateAndThrow(tareaCreateDto);
+			_validatorCreate.ValidateAndThrow(tareaCreateDto);
 
 			var tarea = _mapper.Map<Tarea>(tareaCreateDto);
 			await _repository.CreateTareaAsync(tarea);
 
 			return CreatedAtAction(null, new { id = tarea.Id }, tarea);
+		}
+
+		[HttpPut]
+		public async Task<IActionResult> Update(TareaUpdateDto tareaUpdateDto)
+		{
+			_validatorUpdate.ValidateAndThrow(tareaUpdateDto);
+
+			var tarea = _mapper.Map<Tarea>(tareaUpdateDto);
+			await _repository.EditTareaAsync(tarea);
+
+			return Ok(new { id = tarea.Id });
 		}
 	}
 }

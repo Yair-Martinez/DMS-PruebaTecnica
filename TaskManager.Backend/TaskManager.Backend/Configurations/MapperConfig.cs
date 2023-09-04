@@ -11,6 +11,7 @@ namespace TaskManager.Backend.Configurations
 		{
 			CreateMap<TareaCreateDto, Tarea>().ReverseMap();
 			CreateMap<TareaReadOnlyDto, Tarea>().ReverseMap();
+			CreateMap<TareaUpdateDto, Tarea>().ReverseMap();
 
 			CreateMap<UsuarioRegisterDto, Usuario>().ReverseMap();
 			CreateMap<UsuarioLoginDto, Usuario>().ReverseMap();

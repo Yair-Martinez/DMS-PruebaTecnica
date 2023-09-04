@@ -3,6 +3,6 @@
 	public class UsuarioReponseDto
 	{
 		public string Token { get; set; } = string.Empty;
-		public Guid Id { get; set; }
+		public Guid UsuarioId { get; set; }
 	}
 }

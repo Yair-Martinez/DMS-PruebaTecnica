@@ -53,7 +53,7 @@ namespace TaskManager.Backend.Repositories.UsuarioRepository
 			return new UsuarioReponseDto
 			{
 				Token = token,
-				Id = userByEmail.Id,
+				UsuarioId = userByEmail.Id,
 			};
 		}
 
